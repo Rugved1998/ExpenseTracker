@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function AddExpense({ onClose, onSave }) {
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
+export default function EditExpense({ transaction, onClose, onSave }) {
+  const [title, setTitle] = useState(transaction.title);
+  const [amount, setAmount] = useState(transaction.amount);
+  const [category, setCategory] = useState(transaction.category);
+  const [date, setDate] = useState(transaction.date);
+
+  useEffect(() => {
+    setTitle(transaction.title);
+    setAmount(transaction.amount);
+    setCategory(transaction.category);
+    setDate(transaction.date);
+  }, [transaction]);
 
   const handleSubmit = () => {
     const value = parseFloat(amount);
     if (title && !isNaN(value) && category && date) {
-      onSave({ title, amount: value, category, date });
+      onSave({ ...transaction, title, amount: value, category, date });
       onClose();
     }
   };
 
   return (
     <div className="modal">
-      <h2>Add Expense</h2>
+      <h2>Edit Expense</h2>
       <input
         type="text"
         placeholder="Title"
@@ -40,7 +47,7 @@ export default function AddExpense({ onClose, onSave }) {
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-      <button onClick={handleSubmit}>Add Expense</button>
+      <button onClick={handleSubmit}>Save Changes</button>
       <button onClick={onClose}>Cancel</button>
     </div>
   );

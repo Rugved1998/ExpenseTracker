@@ -1,0 +1,21 @@
+.home{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color:white;
+
+}
+
+.upper{
+    font-family: sans-serif;
+}
+
+.lower{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:start ;
+    font-family: sans-serif;
+}
