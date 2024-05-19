@@ -21,7 +21,6 @@ export default function TopExpense  ({ transactions })  {
       <h2>Top Expenses</h2>
       <div className="chart-container">
         <div className="bar-chart">
-          <h3>Horizontal Bar View</h3>
           <BarChart width={600} height={300} data={categoryData}>
             <XAxis dataKey="category" />
             <YAxis />

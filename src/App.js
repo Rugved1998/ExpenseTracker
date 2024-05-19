@@ -25,7 +25,7 @@ export default function App() {
   const [showEditExpense, setShowEditExpense] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState(null);
 
-  // Update localStorage whenever balance, expenses, or transactions change
+  
   useEffect(() => {
     localStorage.setItem('balance', balance);
   }, [balance]);
@@ -85,12 +85,15 @@ export default function App() {
             <h2>Expenses: ₹{expenses}</h2>
             <button onClick={() => setShowAddExpense(true)}>+ Add Expense</button>
           </div>
+          <div>
+          <ExpensePieChart transactions={transactions} />
+          </div>
         </div>
-        <ExpensePieChart transactions={transactions} />
+        
       </header>
       <main>
-        <TopExpense transactions={transactions} />
         <RecentTransactions transactions={transactions} onEditClick={handleEditClick} onDeleteClick={handleDeleteTransaction} />
+        <TopExpense transactions={transactions} />
       </main>
       {showAddBalance && <AddIncome onClose={() => setShowAddBalance(false)} onSave={handleAddBalance} />}
       {showAddExpense && <AddExpense onClose={() => setShowAddExpense(false)} onSave={handleAddExpense} />}
@@ -100,6 +103,7 @@ export default function App() {
           onClose={() => setShowEditExpense(false)}
           onSave={handleEditExpense}
         />
+      
       )}
     </div>
   );
